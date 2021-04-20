@@ -1,0 +1,8 @@
+.main-container {
+    color: black;
+    overflow: auto;
+    position: absolute;
+    top: 74px;
+    margin: 0;
+    background-color: red;
+}

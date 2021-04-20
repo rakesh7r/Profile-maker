@@ -86,6 +86,14 @@ ul {
     color: white;
     text-decoration: none;
 }
+.header-nav-links {
+    width: 100%;
+}
 .header-link-links:hover {
     text-decoration: underline;
+}
+.temp {
+    position: absolute;
+    top: 400px;
+    left: 400px;
 }
