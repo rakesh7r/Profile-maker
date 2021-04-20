@@ -14,6 +14,7 @@ const Login = (props) => {
         setHasAccount,
         emailError,
         passwordError,
+        handleGoogleLogin,
     } = props
     return (
         <div className="login-outer">
@@ -54,9 +55,13 @@ const Login = (props) => {
                 <button className="profile-login-button" onClick={handleSignup}>
                     Signup
                 </button>
-                
             )}
-            
+            <button
+                className="profile-signin-with-google-button"
+                onClick={handleGoogleLogin}
+            >
+                Signup with google
+            </button>
         </div>
     )
 }

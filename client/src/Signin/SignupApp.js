@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import fire from "./fire"
+import firebase from "firebase"
 import Login from "./Login"
 import SuccessfulLogin from "./successfulLogin"
 
@@ -52,6 +53,25 @@ const Signup = () => {
     const handleLogout = () => {
         fire.auth().signOut()
     }
+
+    const handleGoogleLogin = () => {
+        var provider = new firebase.auth.GoogleAuthProvider()
+        firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then((result) => {
+                /** @type {firebase.auth.OAuthCredential} */
+                var credential = result.credential
+
+                var token = credential.accessToken
+                var user = result.user
+                // ...
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     const authListner = () => {
         fire.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -89,9 +109,11 @@ const Signup = () => {
                     setHasAccount={setHasAccount}
                     emailError={emailError}
                     passwordError={passwordError}
+                    handleGoogleLogin={handleGoogleLogin}
                 />
             ) : (
-                    <SuccessfulLogin handleLogout={handleLogout}>{ user.uid}</SuccessfulLogin>
+                <SuccessfulLogin handleLogout={handleLogout}>
+                </SuccessfulLogin>
             )}
         </div>
     )
