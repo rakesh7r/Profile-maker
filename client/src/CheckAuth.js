@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
-import fire from "./fire"
+import fire from "./Signin/fire"
 import firebase from "firebase"
-import Login from "./Login"
-import SuccessfulLogin from "./successfulLogin"
+import Login from "./Signin/Login"
 
-const Signup = () => {
+import App from "./App"
+const CheckAuth = () => {
     const [user, setUser] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -62,16 +62,15 @@ const Signup = () => {
             .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
                 var credential = result.credential
-
                 var token = credential.accessToken
                 var user = result.user
-                // ...
+                console.log("token : " + token)
+                console.log("user : " + user)
             })
             .catch((error) => {
                 console.log(error)
             })
     }
-
     const authListner = () => {
         fire.auth().onAuthStateChanged((user) => {
             if (user) {
@@ -81,6 +80,7 @@ const Signup = () => {
             } else setUser("")
         })
     }
+
     useEffect(() => {
         authListner()
     }, [])
@@ -112,11 +112,12 @@ const Signup = () => {
                     handleGoogleLogin={handleGoogleLogin}
                 />
             ) : (
-                <SuccessfulLogin handleLogout={handleLogout}>
-                </SuccessfulLogin>
+                <div>
+                    <App handleLogout={handleLogout}></App>
+                </div>
             )}
         </div>
     )
 }
 
-export default Signup
+export default CheckAuth

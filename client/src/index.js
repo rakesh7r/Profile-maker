@@ -1,5 +1,5 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./App"
+import CheckAuth from "./CheckAuth"
 
-ReactDOM.render(<App />, document.getElementById("root"))
+ReactDOM.render(<CheckAuth />, document.getElementById("root"))

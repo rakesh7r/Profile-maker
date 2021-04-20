@@ -18,7 +18,12 @@ class Profile extends Component {
                         <span className="span-bold">Edit profile</span>
                     </button>
                     <button className="profile-edit-profile">
-                        <span className="span-bold">Sign out</span>
+                        <span
+                            className="span-bold"
+                            onClick={this.props.handleLogout}
+                        >
+                            Sign out
+                        </span>
                     </button>
                 </div>
                 <div className="profile-main"></div>
