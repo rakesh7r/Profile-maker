@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
-import fire from "./Signin/fire"
+import fire from "./Configurations/fire"
 import firebase from "firebase"
 import Login from "./Signin/Login"
 
 import App from "./App"
+import LoginTwo from "./Signin/LoginTwo"
 const CheckAuth = () => {
     const [user, setUser] = useState("")
     const [email, setEmail] = useState("")
@@ -11,6 +12,7 @@ const CheckAuth = () => {
     const [emailError, setEmailError] = useState("")
     const [passwordError, setPasswordError] = useState("")
     const [hasAccount, setHasAccount] = useState(true)
+    const [username, setUsername] = useState("")
 
     const handleLogin = () => {
         clearErrors()
@@ -96,7 +98,7 @@ const CheckAuth = () => {
     return (
         <div>
             {!user ? (
-                <Login
+                <LoginTwo
                     email={email}
                     password={password}
                     setEmail={setEmail}
@@ -110,6 +112,8 @@ const CheckAuth = () => {
                     emailError={emailError}
                     passwordError={passwordError}
                     handleGoogleLogin={handleGoogleLogin}
+                    username={username}
+                    setUsername={setUsername}
                 />
             ) : (
                 <div>
