@@ -65,7 +65,10 @@ class Header extends Component {
                     </div>
                     <Switch>
                         <Route path="/profile">
-                            <Profile handleLogout={this.props.handleLogout} />
+                            <Profile
+                                user={this.props.user}
+                                handleLogout={this.props.handleLogout}
+                            />
                         </Route>
                         <Route path="/notifications">Notifications</Route>
                         <Route path="/addpost">Addpost</Route>

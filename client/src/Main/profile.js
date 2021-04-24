@@ -1,19 +1,15 @@
 import React, { Component } from "react"
 import Avatar from "@material-ui/core/avatar"
+import fire from "../Configurations/fire.js"
 import "./profile.css"
-
 class Profile extends Component {
     render() {
+        const { displayName, email } = fire.auth().currentUser
         return (
             <div className="profile-outer-container">
                 <div className="profile-left-container">
-                    {/* <img
-                        src="lock_w (2).jpg"
-                        alt="profile"
-                        className="profile-img"
-                    /> */}
                     <Avatar
-                        alt="Rakesh"
+                        alt={displayName}
                         src="lock_w (2).jpg"
                         style={{
                             width: "250px",
@@ -22,8 +18,7 @@ class Profile extends Component {
                         }}
                     ></Avatar>
                     <div className="profile-left-user-details">
-                        <h3 className="profile-name">Rakesh Gandla</h3>
-                        <span className="profile-username">@rakesh7r</span>
+                        <h3 className="profile-name">@{displayName}</h3>
                     </div>
                     <button className="profile-edit-profile">
                         <span className="span-bold">Edit profile</span>
@@ -42,5 +37,4 @@ class Profile extends Component {
         )
     }
 }
-
 export default Profile

@@ -6,13 +6,14 @@ import Login from "./Signin/Login"
 import App from "./App"
 import LoginTwo from "./Signin/LoginTwo"
 const CheckAuth = () => {
-    const [user, setUser] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [emailError, setEmailError] = useState("")
-    const [passwordError, setPasswordError] = useState("")
+    const [user, setUser] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
+    const [emailError, setEmailError] = useState(null)
+    const [passwordError, setPasswordError] = useState(null)
     const [hasAccount, setHasAccount] = useState(true)
-    const [username, setUsername] = useState("")
+    const [username, setUsername] = useState(null)
+    const [name, setName] = useState(null)
 
     const handleLogin = () => {
         clearErrors()
@@ -38,6 +39,16 @@ const CheckAuth = () => {
         clearErrors()
         fire.auth()
             .createUserWithEmailAndPassword(email, password)
+            .then(user =>
+            {
+                var u = fire.auth().currentUser
+                u.updateProfile({
+                    displayName: name,
+                    username: name,
+                })
+                    .then(() => console.log("data updated successfully"))
+                    .catch((err) => console.log("error updating profile"))
+                })
             .catch((err) => {
                 switch (err.code) {
                     case "auth/email-already-in-use":
@@ -73,18 +84,19 @@ const CheckAuth = () => {
                 console.log(error)
             })
     }
-    const authListner = () => {
-        fire.auth().onAuthStateChanged((user) => {
+    const authListner = () => {}
+
+    useEffect(() => {
+        const unsubscribe = fire.auth().onAuthStateChanged((user) => {
             if (user) {
                 clearInputs()
                 console.log(user)
                 setUser(user)
-            } else setUser("")
+            } else setUser(null)
         })
-    }
-
-    useEffect(() => {
-        authListner()
+        // return () => {
+        //     unsubscribe()
+        // }
     }, [])
 
     const clearInputs = () => {
@@ -114,10 +126,13 @@ const CheckAuth = () => {
                     handleGoogleLogin={handleGoogleLogin}
                     username={username}
                     setUsername={setUsername}
+                    name={name}
+                    setName={setName}
                 />
             ) : (
                 <div>
-                    <App handleLogout={handleLogout}></App>
+                    <App user={user} handleLogout={handleLogout}></App>
+                    {console.log(name, username)}
                 </div>
             )}
         </div>

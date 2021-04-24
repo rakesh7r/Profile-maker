@@ -40,6 +40,8 @@ const LoginTwo = (props) => {
         handleGoogleLogin,
         username,
         setUsername,
+        name,
+        setName,
     } = props
 
     const handleOpen = () => {
@@ -81,6 +83,18 @@ const LoginTwo = (props) => {
                         {hasAccount ? <h1>Signin</h1> : <h1>Signup</h1>}
                     </span>
                 </center>
+                {hasAccount ? null : (
+                    <TextField
+                        id="outlined-basic"
+                        label="username"
+                        variant="outlined"
+                        style={{
+                            marginBottom: "15px",
+                        }}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                )}
                 <TextField
                     id="outlined-basic"
                     label="Email"
@@ -91,7 +105,7 @@ const LoginTwo = (props) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                {hasAccount ? null : (
+                {/* {hasAccount ? null : (
                     <TextField
                         id="outlined-basic"
                         label="Username"
@@ -100,9 +114,11 @@ const LoginTwo = (props) => {
                             marginBottom: "15px",
                         }}
                         value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(e) => {
+                            setUsername(e.target.value)
+                        }}
                     />
-                )}
+                )} */}
                 <TextField
                     type="password"
                     id="outlined-basic"
@@ -154,9 +170,9 @@ const LoginTwo = (props) => {
                     }}
                 >
                     {hasAccount ? (
-                        <span>Already a User?</span>
-                    ) : (
                         <span>New User?</span>
+                    ) : (
+                        <span>Already a User?</span>
                     )}
                 </Button>
             </div>

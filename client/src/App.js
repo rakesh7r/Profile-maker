@@ -6,7 +6,7 @@ class App extends React.Component {
         const { handleLogout } = this.props
         return (
             <div className="App">
-                <Header handleLogout={handleLogout} />
+                <Header user={this.props.user} handleLogout={handleLogout} />
             </div>
         )
     }
