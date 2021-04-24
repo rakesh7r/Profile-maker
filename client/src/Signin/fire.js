@@ -1,9 +1,10 @@
 import firebase from "firebase/app"
 import "firebase/auth"
 import "firebase/firestore"
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyBVVklUTwRYXj3E8ZB_s_rzp556ZIUJ4yc",
     authDomain: "profile-maker-b3713.firebaseapp.com",
+    databaseURL: "https://profile-maker-b3713-default-rtdb.firebaseio.com",
     projectId: "profile-maker-b3713",
     storageBucket: "profile-maker-b3713.appspot.com",
     messagingSenderId: "870682979063",
@@ -11,5 +12,4 @@ var firebaseConfig = {
     measurementId: "G-FFSC46SWX4",
 }
 const fire = firebase.initializeApp(firebaseConfig)
-
 export default fire
