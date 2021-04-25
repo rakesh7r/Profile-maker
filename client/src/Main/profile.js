@@ -1,40 +1,75 @@
-import React, { Component } from "react"
+import React, { useEffect } from "react"
 import Avatar from "@material-ui/core/avatar"
+import $ from "jquery"
 import fire from "../Configurations/fire.js"
 import "./profile.css"
-class Profile extends Component {
-    render() {
-        const { displayName, email } = fire.auth().currentUser
-        return (
-            <div className="profile-outer-container">
-                <div className="profile-left-container">
+import { makeStyles } from "@material-ui/core/styles"
+import { Button } from "@material-ui/core"
+
+const useStyles = makeStyles((theme) => ({
+    large: {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
+    },
+}))
+
+const Profile = (props) => {
+    const { displayName, email, profileURL } = fire.auth().currentUser
+    const classes = useStyles()
+
+    useEffect(() => {
+        $(".profile-main").css("width", window.innerWidth)
+        $(".profile-main").css("height", window.innerHeight)
+    }, [])
+    return (
+        <div className="profile-main">
+            <div className="profile-left">
+                <center>
                     <Avatar
-                        alt={displayName}
-                        src="lock_w (2).jpg"
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/1.jpg"
+                        className={classes.large}
                         style={{
-                            width: "250px",
-                            height: "250px",
-                            fontSize: "80px",
+                            width: "200px",
+                            height: "200px",
+                            fontSize: "100px",
                         }}
-                    ></Avatar>
-                    <div className="profile-left-user-details">
-                        <h3 className="profile-name">@{displayName}</h3>
-                    </div>
-                    <button className="profile-edit-profile">
-                        <span className="span-bold">Edit profile</span>
-                    </button>
-                    <button className="profile-edit-profile">
-                        <span
-                            className="span-bold"
-                            onClick={this.props.handleLogout}
-                        >
-                            Sign out
-                        </span>
-                    </button>
-                </div>
-                <div className="profile-main"></div>
+                    />
+                    <h2 className="text  profile-left-username">
+                        @{displayName}
+                    </h2>
+                    <Button
+                        onClick={props.handleLogout}
+                        style={{
+                            backgroundColor: "#24292E",
+                            color: "white",
+                            width: "90%",
+                            marginBottom: "15px",
+                        }}
+                    >
+                        SignOut
+                    </Button>
+                    <Button
+                        style={{
+                            backgroundColor: "#24292E",
+                            color: "white",
+                            width: "90%",
+                        }}
+                    >
+                        Edit profile
+                    </Button>
+                </center>
             </div>
-        )
-    }
+            <div className="profile-right">
+                <div className="profile-right-bio-cont">
+                    <h1 className="text">I am Rakesh Gandla</h1>
+                    <p className="text-two profile-right-bio">
+                        This is bio akfj alkjdf lakdf aldkfj adflkja dfladkf j
+                        lorem ipsummary lakdf aldkfj adflkja dfladkf j
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
 }
 export default Profile

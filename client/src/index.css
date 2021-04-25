@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap");
+.text {
+    font-family: "Open Sans", sans-serif;
+    color: black;
+}
+.text-two {
+    font-family: "Roboto Mono", monospace;
+    color: black;
+}
+
