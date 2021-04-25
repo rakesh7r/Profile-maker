@@ -1,14 +1,13 @@
 import React from "react"
 import Header from "./header"
 
-class App extends React.Component {
-    render() {
-        const { handleLogout } = this.props
-        return (
-            <div className="App">
-                <Header user={this.props.user} handleLogout={handleLogout} />
-            </div>
-        )
-    }
+const App = (props) => {
+    const { handleLogout } = props
+    return (
+        <div className="App">
+            <Header user={props.user} handleLogout={handleLogout} />
+        </div>
+    )
 }
+
 export default App

@@ -35,31 +35,68 @@ const CheckAuth = () => {
             })
     }
 
+    const firestore = fire.firestore()
+
     const handleSignup = () => {
         clearErrors()
-        fire.auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(user =>
-            {
-                var u = fire.auth().currentUser
-                u.updateProfile({
-                    displayName: name,
-                    username: name,
-                })
-                    .then(() => console.log("data updated successfully"))
-                    .catch((err) => console.log("error updating profile"))
-                })
-            .catch((err) => {
-                switch (err.code) {
-                    case "auth/email-already-in-use":
-                    case "auth/invalid-email":
-                        setEmailError(err.message)
-                        break
-                    case "auth/weak-password":
-                        setPasswordError(err.message)
-                        break
-                    default:
-                        break
+        firestore
+            .collection("users")
+            .doc(name)
+            .get()
+            .then((doc) => {
+                if (doc.data()) {
+                    alert("User already in use! Choose another")
+                } else {
+                    fire.auth()
+                        .createUserWithEmailAndPassword(email, password)
+                        .then((user) => {
+                            var u = fire.auth().currentUser
+                            u.updateProfile({
+                                displayName: name,
+                                username: name,
+                            })
+                                .then(() => {
+                                    // console.log("data updated successfully")
+                                    firestore
+                                        .collection("users")
+                                        .doc(name)
+                                        .set({
+                                            uid: u.uid,
+                                            displayName: u.displayName,
+                                            gender: null,
+                                            email: u.email,
+                                            username: name,
+                                            bio: null,
+                                            profileInfo: null,
+                                            posts: [],
+                                            saved: [],
+                                        })
+                                        .then(() =>
+                                            console.log("user created")
+                                            )
+                                        .catch((err) =>
+                                            console.log(
+                                                "error creating profile"
+                                            )
+                                        )
+                                })
+                                .catch((err) =>
+                                    console.log("error updating profile")
+                                )
+                        })
+                        .catch((err) => {
+                            switch (err.code) {
+                                case "auth/email-already-in-use":
+                                case "auth/invalid-email":
+                                    setEmailError(err.message)
+                                    break
+                                case "auth/weak-password":
+                                    setPasswordError(err.message)
+                                    break
+                                default:
+                                    break
+                            }
+                        })
                 }
             })
     }
@@ -77,26 +114,24 @@ const CheckAuth = () => {
                 var credential = result.credential
                 var token = credential.accessToken
                 var user = result.user
-                console.log("token : " + token)
-                console.log("user : " + user)
+                // console.log("token : " + token)
+                // console.log("user : " + user)
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             })
     }
-    const authListner = () => {}
-
     useEffect(() => {
         const unsubscribe = fire.auth().onAuthStateChanged((user) => {
             if (user) {
                 clearInputs()
-                console.log(user)
+                // console.log(user)
                 setUser(user)
             } else setUser(null)
         })
-        // return () => {
-        //     unsubscribe()
-        // }
+        return () => {
+            unsubscribe()
+        }
     }, [])
 
     const clearInputs = () => {
@@ -132,7 +167,6 @@ const CheckAuth = () => {
             ) : (
                 <div>
                     <App user={user} handleLogout={handleLogout}></App>
-                    {console.log(name, username)}
                 </div>
             )}
         </div>
