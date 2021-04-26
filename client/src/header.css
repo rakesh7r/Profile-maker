@@ -20,11 +20,11 @@
     flex-direction: row;
     align-items: center;
     padding-top: 21px;
-    width: 35vw;
     justify-content: space-between;
 }
 .header-left {
     margin-top: -5px;
+    width: 39vw;
 }
 .header-right {
     margin-top: 10px;
@@ -32,12 +32,13 @@
 .header-search-field {
     border: 0.5px solid #464e57;
     outline: none;
-    height: 40px;
+    height: 30px;
     min-width: 200px;
     width: 17vw;
     border-radius: 10px;
     background-color: #24292e;
     color: white;
+    padding: 5px;
 }
 .header-search-field:focus {
     outline: none;
@@ -54,7 +55,6 @@
     border-radius: 10px;
     background-color: #24292e;
     color: rgb(182, 181, 181);
-    margin-left: 10px;
 }
 .header-search-btn:hover {
     cursor: pointer;

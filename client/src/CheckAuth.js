@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react"
 import fire from "./Configurations/fire"
 import firebase from "firebase"
-import Login from "./Signin/Login"
+// import Login from "./Signin/Login"
 
 import App from "./App"
 import LoginTwo from "./Signin/LoginTwo"
 const CheckAuth = () => {
-    const [user, setUser] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
-    const [emailError, setEmailError] = useState(null)
-    const [passwordError, setPasswordError] = useState(null)
+    const [user, setUser] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [emailError, setEmailError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
     const [hasAccount, setHasAccount] = useState(true)
-    const [username, setUsername] = useState(null)
-    const [name, setName] = useState(null)
-    const [userDoc, setUserDoc] = useState(null)
+    const [username, setUsername] = useState("")
+    const [name, setName] = useState({})
+    const [userDoc, setUserDoc] = useState({})
 
     const handleLogin = () => {
         clearErrors()

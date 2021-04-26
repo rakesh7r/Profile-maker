@@ -4,10 +4,9 @@ import $ from "jquery"
 import fire from "../Configurations/fire.js"
 import "./profile.css"
 import { makeStyles } from "@material-ui/core/styles"
-import { Button, FormControl, Input, TextField } from "@material-ui/core"
+import { Button, FormControl, TextField } from "@material-ui/core"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
-import FormHelperText from "@material-ui/core/FormHelperText"
 import Select from "@material-ui/core/Select"
 
 const useStyles = makeStyles((theme) => ({
@@ -25,12 +24,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Profile = (props) => {
-    const { displayName, email, profileURL } = fire.auth().currentUser
+    const { displayName } = fire.auth().currentUser
     const { user } = props
     const classes = useStyles()
     const firestore = fire.firestore()
-    const [data, setData] = useState(null)
-    const [gender, setGender] = useState(null)
+    const [data, setData] = useState({})
+    const [gender, setGender] = useState("")
 
     const fetchData = () => {
         firestore

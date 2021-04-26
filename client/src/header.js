@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import TextField from "@material-ui/core/TextField"
 import "./header.css"
 import { Link } from "react-router-dom"
-
+import $ from "jquery"
 const useStyles = makeStyles((theme) => ({
     root: {
         "& .MuiTextField-root": {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
     const classes = useStyles()
-    const [searchValue, setSearchValue] = useState(null)
+    const [searchValue, setSearchValue] = useState("")
     return (
         <div className="header-outer">
             <div className="header-left">
@@ -29,13 +29,11 @@ function Header() {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <Link to={`/user/${searchValue}`}>
-                    <button
-                        className="header-search-btn"
-                    >
-                        GO
-                    </button>
-                </Link>
+                {searchValue ? (
+                    <Link to={`/user/${searchValue}`}>
+                        <button className="header-search-btn">GO</button>
+                    </Link>
+                ) : null}
             </div>
             <div className="header-right">
                 <Link
