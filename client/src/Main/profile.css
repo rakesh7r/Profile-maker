@@ -6,6 +6,7 @@
     flex-direction: row;
     justify-content: flex-start;
     padding: 7px;
+    /* overflow: scroll; */
 }
 .profile-left {
     width: 20%;

@@ -14,6 +14,7 @@ const CheckAuth = () => {
     const [hasAccount, setHasAccount] = useState(true)
     const [username, setUsername] = useState(null)
     const [name, setName] = useState(null)
+    const [userDoc, setUserDoc] = useState(null)
 
     const handleLogin = () => {
         clearErrors()
@@ -63,17 +64,24 @@ const CheckAuth = () => {
                                         .set({
                                             uid: u.uid,
                                             displayName: u.displayName,
+                                            dataAdded: false,
                                             gender: null,
                                             email: u.email,
                                             username: name,
                                             bio: null,
                                             profileInfo: null,
                                             posts: [],
-                                            saved: [],
+                                            savedPosts: [],
+                                            savedProfiles: [],
+                                            certifications: [],
+                                            achievements: [],
+                                            education: [],
+                                            personalInterest: [],
+                                            additionalInformation: [],
                                         })
-                                        .then(() =>
-                                            console.log("user created")
-                                            )
+                                        .then((docRef) =>
+                                            setUserDoc(docRef.data())
+                                        )
                                         .catch((err) =>
                                             console.log(
                                                 "error creating profile"
@@ -127,6 +135,15 @@ const CheckAuth = () => {
                 clearInputs()
                 // console.log(user)
                 setUser(user)
+                // fire.firestore()
+                //     .collection("users")
+                //     .doc(user.displayName)
+                //     .get()
+                //     .then((docRef) => {
+                //         console.log(docRef.data())
+                //         setUserDoc(docRef.data())
+                //     })
+                //     .catch((err) => console.log(err))
             } else setUser(null)
         })
         return () => {
@@ -166,7 +183,7 @@ const CheckAuth = () => {
                 />
             ) : (
                 <div>
-                    <App user={user} handleLogout={handleLogout}></App>
+                    <App user={user} handleLogout={handleLogout} />
                 </div>
             )}
         </div>

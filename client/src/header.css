@@ -1,99 +1,69 @@
 .header-outer {
-    background: #24292e;
-    color: white;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    padding: 10;
-    max-height: 70px;
-    min-width: 700px;
-}
-ul {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-.header-ul1,
-.header-ul2 {
-    width: 100%;
+    max-height: 60px;
+    width: 98vw;
+    background-color: #24292e;
+    margin: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: sticky;
+    top: 0px;
+    color: white;
+    padding: 15px;
+    padding-top: 0;
 }
-.header-ul1 {
-    width: 100%;
-    max-height: 100%;
-}
-.header-title {
-    width: 40%;
+.header-left,
+.header-right {
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    padding-top: 21px;
+    width: 35vw;
     justify-content: space-between;
-    float: left;
 }
-.header-h2 {
-    height: auto;
-    margin-top: 0px;
-    margin-left: -20px;
+.header-left {
+    margin-top: -5px;
 }
-.header-link-title {
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    white-space: nowrap;
+.header-right {
+    margin-top: 10px;
 }
-.header-search {
-    background: #35393d;
-    border: 0.5px solid #15181b;
-    height: 35px;
-    width: 300px;
+.header-search-field {
+    border: 0.5px solid #464e57;
+    outline: none;
+    height: 40px;
+    min-width: 200px;
+    width: 17vw;
     border-radius: 10px;
-    margin-left: 5px;
+    background-color: #24292e;
     color: white;
 }
-.header-search::placeholder {
-    color: rgb(180, 180, 180);
-    padding-left: 20px;
-    margin: auto;
+.header-search-field:focus {
+    outline: none;
+    border: 0.5px solid gray;
 }
-.header-search:focus {
-    outline: 0.5px;
-    border-color: rgb(141, 141, 141);
+.header-search-field::placeholder {
+    color: #878b91;
 }
-.header-title,
-.header-links {
+.header-search-btn {
+    border: 0.5px solid #464e57;
+    outline: none;
+    height: 44px;
+    min-width: 55px;
+    border-radius: 10px;
+    background-color: #24292e;
+    color: rgb(182, 181, 181);
+    margin-left: 10px;
+}
+.header-search-btn:hover {
+    cursor: pointer;
+    border: 0.5px solid white;
+}
+.header-right {
     display: flex;
     flex-direction: row;
-}
-.header-links {
-    justify-content: flex-end;
-    padding: 10px;
-    padding-right: 20px;
-    white-space: nowrap;
-}
-.header-ul2 {
-    width: 70%;
-    align-self: end;
-    float: right;
-    display: flex;
-    flex-direction: row;
+    width: 40vw;
     justify-content: space-between;
-}
-.header-link-links {
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-}
-.header-nav-links {
-    width: 100%;
-}
-.header-link-links:hover {
-    text-decoration: underline;
-}
-.temp {
-    position: absolute;
-    top: 400px;
-    left: 400px;
+    padding: 8px;
 }
