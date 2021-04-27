@@ -80,7 +80,11 @@ const LoginTwo = (props) => {
             >
                 <center>
                     <span className="span-bold">
-                        {hasAccount ? <h1>Signin</h1> : <h1>Signup</h1>}
+                        {hasAccount ? (
+                            <h1 style={{ marginBottom: "25px" }}>Sign in</h1>
+                        ) : (
+                            <h1 style={{ marginBottom: "25px" }}>Sign up</h1>
+                        )}
                     </span>
                 </center>
                 {hasAccount ? null : (
@@ -92,7 +96,7 @@ const LoginTwo = (props) => {
                             marginBottom: "15px",
                         }}
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => setName(e.target.value.toLowerCase())}
                     />
                 )}
                 <TextField
@@ -131,7 +135,10 @@ const LoginTwo = (props) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 {emailError || passwordError ? (
-                    <span className="login-error error-message">
+                    <span
+                        className="login-error error-message"
+                        style={{ color: "red" }}
+                    >
                         {emailError || passwordError}
                     </span>
                 ) : null}

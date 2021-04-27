@@ -1,6 +1,7 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from "./header"
+import GetProfile from "./Main/GetProfile"
 import Profile from "./Main/profile"
 import "./Routing.css"
 function Routing(props) {
@@ -15,7 +16,7 @@ function Routing(props) {
                             handleLogout={props.handleLogout}
                         />
                     </Route>
-                    <Route path="/user/:username">hello</Route>
+                    <Route path="/user/:username" component={GetProfile} />
                     <Route path="/notifications">Notifications</Route>
                     <Route path="/addpost">Addpost</Route>
                     <Route path="/explore">Explore</Route>

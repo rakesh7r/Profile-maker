@@ -58,7 +58,7 @@ function Header() {
                     style={{ textDecoration: "none", color: "white" }}
                     to="/profile"
                 >
-                    <h3>profile</h3>
+                    <h3>Profile</h3>
                 </Link>
             </div>
         </div>

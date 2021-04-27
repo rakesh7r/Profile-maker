@@ -36,10 +36,14 @@
     -moz-box-shadow: 0 0 10px #ccc;
     -webkit-box-shadow: 0 0 10px #ccc;
     box-shadow: 0 0 10px #ccc;
-    
 }
 
 .profile-right-bio {
     word-break: break-all;
     width: 90%;
+}
+.profile-right-personal-info {
+    display: flex;
+    flex-direction: column;
+    padding: 3vw;
 }

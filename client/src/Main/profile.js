@@ -4,10 +4,8 @@ import $ from "jquery"
 import fire from "../Configurations/fire.js"
 import "./profile.css"
 import { makeStyles } from "@material-ui/core/styles"
-import { Button, FormControl, TextField } from "@material-ui/core"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
-import Select from "@material-ui/core/Select"
+import EditData from "./EditData.js"
+import { Button } from "@material-ui/core"
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -30,7 +28,19 @@ const Profile = (props) => {
     const firestore = fire.firestore()
     const [data, setData] = useState({})
     const [gender, setGender] = useState("")
-
+    const [name, setName] = useState("")
+    const [bio, setBio] = useState("")
+    const [xname, setXnmae] = useState("")
+    const [xgpa, setXgpa] = useState(null)
+    const [collegename, setCollegename] = useState("")
+    const [collegegpa, setCollegegpa] = useState(null)
+    const [gradname, setGradname] = useState("")
+    const [gradgpa, setGradgpa] = useState(null)
+    const [sepcializationname, setSpecializationname] = useState("")
+    const [specializationgpa, setSpecializationgpa] = useState(null)
+    const [interest, setInterest] = useState("")
+    const [interests, setInterests] = useState([])
+    const [editSetter, setEditSetter] = useState(false)
     const fetchData = () => {
         firestore
             .collection("users")
@@ -38,16 +48,69 @@ const Profile = (props) => {
             .get()
             .then((doc) => {
                 setData(doc.data())
-                console.log(data)
+                // console.log(data)
             })
             .catch((err) => console.log(err))
     }
 
     useEffect(() => {
         fetchData()
+        // console.log(data)
         $(".profile-main").css("width", window.innerWidth)
-        $(".profile-main").css("height", window.innerHeight)
-    }, [])
+    }, [displayName, data.dataAdded, data.displayName, data])
+
+    const validateAndSave = () => {
+        if (
+            (name.length === 0 && data.dataAdded === false) ||
+            (data.displayName === "" && name.length === 0)
+        ) {
+            return alert("Enter your name first!")
+        }
+        if (gender === "" && data.dataAdded === false) {
+            return alert("Choose your gender")
+        }
+        if ((xname === "" || xgpa === "") && data.dataAdded === false)
+            return alert("Enter Your Schooling details Correctly")
+        if (
+            (collegename === "" || collegegpa === "") &&
+            data.dataAdded === false
+        )
+            return alert("Enter College details Corrctly")
+        if ((gradname === "" || gradgpa === "") && data.dataAdded === false)
+            return alert("Enter Your graduation details")
+        if (isNaN(xgpa) || isNaN(collegegpa) || isNaN(gradgpa))
+            return alert(
+                "GPA must be a number (Remove if any special character is included(%))"
+            )
+        save()
+    }
+    const save = () => {
+        firestore
+            .collection("users")
+            .doc(displayName)
+            .update({
+                dataAdded: true,
+                bio: bio || data.bio,
+                displayName: name || data.displayName,
+                gender: data.gender || gender,
+                "education.school.name": xname || data.education.school.name,
+                "education.school.gpa": xgpa || data.education.school.gpa,
+                "education.college.name":
+                    collegename || data.education.college.name,
+                "education.college.gpa":
+                    collegegpa || data.education.college.gpa,
+                "education.graduation.name":
+                    gradname || data.education.graduation.name,
+                "education.graduation.gpa":
+                    gradgpa || data.education.graduation.gpa,
+                "education.specialization.name":
+                    sepcializationname || data.education.specialization.name,
+                "education.specialization.gpa":
+                    specializationgpa || data.education.specialization.gpa,
+            })
+        setEditSetter(!editSetter)
+    }
+
     return (
         <div className="profile-main">
             {user ? (
@@ -63,7 +126,10 @@ const Profile = (props) => {
                                 fontSize: "100px",
                             }}
                         />
-                        <h2 className="text  profile-left-username">
+                        <h2
+                            className="text  profile-left-username"
+                            style={{ padding: "20px" }}
+                        >
                             @{displayName}
                         </h2>
                         <Button
@@ -83,93 +149,48 @@ const Profile = (props) => {
                                 color: "white",
                                 width: "90%",
                             }}
+                            onClick={() => {
+                                setEditSetter(!editSetter)
+                            }}
                         >
                             Edit profile
                         </Button>
                     </center>
                 </div>
             ) : null}
+
             {data ? (
                 <div className="profile-right">
-                    {console.log(data)}
-                    {data.dataAdded === false ? (
-                        <div className="profile-right-getData">
-                            <div>
-                                <h1>Personal Information</h1>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Enter Your name"
-                                    variant="outlined"
-                                    required
-                                />
-                                <TextField
-                                    id="outlined-basic"
-                                    label="Add about"
-                                    variant="outlined"
-                                />
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel id="demo-simple-select-label">
-                                        Gender
-                                    </InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={gender}
-                                        onChange={(event) => {
-                                            setGender(event.target.value)
-                                        }}
-                                    >
-                                        <MenuItem value={"Female"}>
-                                            Female
-                                        </MenuItem>
-                                        <MenuItem value={"Male"}>Male</MenuItem>
-                                        <MenuItem value={"Other"}>
-                                            Other
-                                        </MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-                            <h1 className="text">Educational Information</h1>
-                            <div>
-                                <h2 className="text">X Class Details</h2>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="School Name"
-                                    variant="outlined"
-                                />
-                                <TextField
-                                    id="outlined-basic"
-                                    label="GPA/Percentage"
-                                    variant="outlined"
-                                />
-                            </div>
-                            <div>
-                                <h2 className="text">X Class Details</h2>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="School Name"
-                                    variant="outlined"
-                                />
-                                <TextField
-                                    id="outlined-basic"
-                                    label="GPA/Percentage"
-                                    variant="outlined"
-                                />
-                            </div>
-                            <div>
-                                <h2 className="text">X Class Details</h2>
-                                <TextField
-                                    id="outlined-basic"
-                                    label="School Name"
-                                    variant="outlined"
-                                />
-                                <TextField
-                                    id="outlined-basic"
-                                    label="GPA/Percentage"
-                                    variant="outlined"
-                                />
-                            </div>
-                        </div>
+                    {data.dataAdded === false || editSetter ? (
+                        <EditData
+                            validateAndSave={validateAndSave}
+                            gender={gender}
+                            data={data}
+                            name={name}
+                            bio={bio}
+                            xname={xname}
+                            xgpa={xgpa}
+                            collegename={collegename}
+                            collegegpa={collegegpa}
+                            gradname={gradname}
+                            gradgpa={gradgpa}
+                            interest={interest}
+                            interests={interests}
+                            setData={setData}
+                            setGender={setGender}
+                            setName={setName}
+                            setBio={setBio}
+                            setXnmae={setXnmae}
+                            setXgpa={setXgpa}
+                            setCollegename={setCollegename}
+                            setCollegegpa={setCollegegpa}
+                            setGradname={setGradname}
+                            setGradgpa={setGradgpa}
+                            setInterest={setInterest}
+                            setInterests={setInterests}
+                            editSetter={editSetter}
+                            setEditSetter={setEditSetter}
+                        />
                     ) : (
                         <div className="profile-right-bio-cont">
                             <h1 className="text">{data.displayName}</h1>

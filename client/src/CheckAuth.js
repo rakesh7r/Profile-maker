@@ -13,7 +13,7 @@ const CheckAuth = () => {
     const [passwordError, setPasswordError] = useState("")
     const [hasAccount, setHasAccount] = useState(true)
     const [username, setUsername] = useState("")
-    const [name, setName] = useState({})
+    const [name, setName] = useState("")
     const [userDoc, setUserDoc] = useState({})
 
     const handleLogin = () => {
@@ -75,7 +75,25 @@ const CheckAuth = () => {
                                             savedProfiles: [],
                                             certifications: [],
                                             achievements: [],
-                                            education: [],
+                                            education: {
+                                                school: {
+                                                    name: "",
+                                                    gpa: "",
+                                                },
+                                                college: {
+                                                    name: "",
+                                                    gpa: "",
+                                                },
+                                                graduation: {
+                                                    name: "",
+                                                    gpa: "",
+                                                },
+                                                specialization: {
+                                                    name: "",
+                                                    gpa: "",
+                                                },
+                                            },
+
                                             personalInterest: [],
                                             additionalInformation: [],
                                         })
