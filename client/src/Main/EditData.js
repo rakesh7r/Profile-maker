@@ -47,6 +47,10 @@ function EditData(props) {
         setGradname,
         gradgpa,
         setGradgpa,
+        specializationname,
+        setSepcializationname,
+        specializationgpa,
+        setSpecializationgpa,
         interest,
         setInterest,
         interests,
@@ -67,7 +71,7 @@ function EditData(props) {
                     required
                     style={{
                         marginBottom: "15px",
-                        width: "85%",
+                        width: "95%",
                     }}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -78,7 +82,7 @@ function EditData(props) {
                     variant="outlined"
                     style={{
                         marginBottom: "0px",
-                        width: "85%",
+                        width: "95%",
                     }}
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
@@ -86,7 +90,7 @@ function EditData(props) {
                 <FormControl
                     className={classes.formControl}
                     style={{
-                        width: "85%",
+                        width: "95%",
                     }}
                 >
                     <InputLabel id="demo-simple-select-label">
@@ -136,7 +140,7 @@ function EditData(props) {
                         variant="outlined"
                         style={{
                             marginBottom: "15px",
-                            width: "85%",
+                            width: "95%",
                         }}
                         value={xname}
                         onChange={(e) => setXnmae(e.target.value)}
@@ -147,7 +151,7 @@ function EditData(props) {
                         variant="outlined"
                         style={{
                             marginBottom: "15px",
-                            width: "85%",
+                            width: "95%",
                         }}
                         value={xgpa}
                         onChange={(e) => setXgpa(e.target.value)}
@@ -161,7 +165,7 @@ function EditData(props) {
                         variant="outlined"
                         style={{
                             marginBottom: "15px",
-                            width: "85%",
+                            width: "95%",
                         }}
                         value={collegename}
                         onChange={(e) => setCollegename(e.target.value)}
@@ -172,7 +176,7 @@ function EditData(props) {
                         variant="outlined"
                         style={{
                             marginBottom: "15px",
-                            width: "85%",
+                            width: "95%",
                         }}
                         value={collegegpa}
                         onChange={(e) => setCollegegpa(e.target.value)}
@@ -186,7 +190,7 @@ function EditData(props) {
                         variant="outlined"
                         style={{
                             marginBottom: "15px",
-                            width: "85%",
+                            width: "95%",
                         }}
                         value={gradname}
                         onChange={(e) => setGradname(e.target.value)}
@@ -197,10 +201,35 @@ function EditData(props) {
                         variant="outlined"
                         style={{
                             marginBottom: "15px",
-                            width: "85%",
+                            width: "95%",
                         }}
                         value={gradgpa}
                         onChange={(e) => setGradgpa(e.target.value)}
+                    />
+                    <h2 className="text" style={{ marginBottom: "15px" }}>
+                        Specialization Details
+                    </h2>
+                    <TextField
+                        id="outlined-basic"
+                        label="College Name"
+                        variant="outlined"
+                        style={{
+                            marginBottom: "15px",
+                            width: "95%",
+                        }}
+                        value={specializationname}
+                        onChange={(e) => setSepcializationname(e.target.value)}
+                    />
+                    <TextField
+                        id="outlined-basic"
+                        label="GPA/Percentage"
+                        variant="outlined"
+                        style={{
+                            marginBottom: "15px",
+                            width: "95%",
+                        }}
+                        value={specializationgpa}
+                        onChange={(e) => setSpecializationgpa(e.target.value)}
                     />
                     <Button
                         onClick={() => {
@@ -209,12 +238,11 @@ function EditData(props) {
                         style={{
                             color: "white",
                             backgroundColor: "#24292E",
-                            width: "85%",
+                            width: "95%",
                         }}
                     >
                         Save details
                     </Button>
-                    {console.log(gender)}
                 </div>
             </div>
         </div>

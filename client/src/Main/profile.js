@@ -5,7 +5,8 @@ import fire from "../Configurations/fire.js"
 import "./profile.css"
 import { makeStyles } from "@material-ui/core/styles"
 import EditData from "./EditData.js"
-import { Button } from "@material-ui/core"
+import { Button, CircularProgress } from "@material-ui/core"
+import ProfileMain from "./ProfileMain.js"
 
 const useStyles = makeStyles((theme) => ({
     large: {
@@ -19,12 +20,18 @@ const useStyles = makeStyles((theme) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    root: {
+        display: "flex",
+        "& > * + *": {
+            marginLeft: theme.spacing(2),
+        },
+    },
 }))
 
 const Profile = (props) => {
+    const classes = useStyles()
     const { displayName } = fire.auth().currentUser
     const { user } = props
-    const classes = useStyles()
     const firestore = fire.firestore()
     const [data, setData] = useState({})
     const [gender, setGender] = useState("")
@@ -57,12 +64,14 @@ const Profile = (props) => {
         fetchData()
         // console.log(data)
         $(".profile-main").css("width", window.innerWidth)
-    }, [displayName, data.dataAdded, data.displayName, data])
+    }, [displayName, data])
 
     const validateAndSave = () => {
         if (
-            (name.length === 0 && data.dataAdded === false) ||
-            (data.displayName === "" && name.length === 0)
+            (data.dataAdded === false ||
+                data.displayName === "" ||
+                data.displayName.trim().length < 2) &&
+            name.length === 0
         ) {
             return alert("Enter your name first!")
         }
@@ -112,9 +121,9 @@ const Profile = (props) => {
     }
 
     return (
-        <div className="profile-main">
+        <div className="profile-main" style={{ minHeight: "85vh" }}>
             {user ? (
-                <div className="profile-left">
+                <div className="profile-left" style={{ maxHeight: "100vh" }}>
                     <center>
                         <Avatar
                             alt="Remy Sharp"
@@ -127,11 +136,52 @@ const Profile = (props) => {
                             }}
                         />
                         <h2
+                            className="text"
+                            style={{
+                                margin: "0",
+                                padding: "0",
+                                marginBottom: "-15px",
+                                marginTop: "10px",
+                            }}
+                        >
+                            {data.displayName}
+                        </h2>
+                        <h3
                             className="text  profile-left-username"
-                            style={{ padding: "20px" }}
+                            style={{ padding: "20px", marginBottom: "-10px" }}
                         >
                             @{displayName}
-                        </h2>
+                        </h3>
+                        {data ? (
+                            <p
+                                className="text"
+                                style={{
+                                    width: "100%",
+                                    wordBreak: "break-word",
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {data.bio}
+                            </p>
+                        ) : null}
+                        <div style={{ padding: " 10px" }}>
+                            {data.education ? (
+                                data.education.specialization ? (
+                                    <div>
+                                        <p>
+                                            {data.education.specialization.name}
+                                        </p>
+                                    </div>
+                                ) : data.education.graduation ? (
+                                    <p>{data.education.graduation.name}</p>
+                                ) : data.education.college ? (
+                                    <p>{data.education.college.name}</p>
+                                ) : data.education.school ? (
+                                    <p>{data.education.school.name}</p>
+                                ) : null
+                            ) : null}
+                        </div>
+
                         <Button
                             onClick={props.handleLogout}
                             style={{
@@ -153,11 +203,17 @@ const Profile = (props) => {
                                 setEditSetter(!editSetter)
                             }}
                         >
-                            Edit profile
+                            {editSetter ? (
+                                <span>Cancel</span>
+                            ) : (
+                                <span>Edit profile</span>
+                            )}
                         </Button>
                     </center>
                 </div>
-            ) : null}
+            ) : (
+                <CircularProgress color="secondary" />
+            )}
 
             {data ? (
                 <div className="profile-right">
@@ -190,13 +246,17 @@ const Profile = (props) => {
                             setInterests={setInterests}
                             editSetter={editSetter}
                             setEditSetter={setEditSetter}
+                            specializationname={sepcializationname}
+                            setSepcializationname={setSpecializationname}
+                            specializationgpa={specializationgpa}
+                            setSpecializationgpa={setSpecializationgpa}
                         />
                     ) : (
-                        <div className="profile-right-bio-cont">
-                            <h1 className="text">{data.displayName}</h1>
-                            <p className="text-two profile-right-bio">
-                                {data.bio}
-                            </p>
+                        <div
+                            // className="profile-right-bio-cont"
+                            style={{ padding: "30px" }}
+                        >
+                            <ProfileMain />
                         </div>
                     )}
                 </div>

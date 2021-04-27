@@ -63,7 +63,7 @@ const CheckAuth = () => {
                                         .doc(name)
                                         .set({
                                             uid: u.uid,
-                                            displayName: u.displayName,
+                                            displayName: null,
                                             dataAdded: false,
                                             gender: null,
                                             email: u.email,
