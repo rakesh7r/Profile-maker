@@ -1,0 +1,9 @@
+.post-handler {
+    padding: 20px;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 7px;
+}
+.post-handler:hover {
+    box-shadow: 0 0 10px #ccc;
+}

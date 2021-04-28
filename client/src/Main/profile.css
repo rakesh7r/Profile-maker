@@ -18,15 +18,17 @@
     padding: 20px;
     padding-left: 5px;
 }
-.profile-left:hover,
-.profile-right:hover {
+.profile-left:hover {
     -moz-box-shadow: 0 0 10px #ccc;
     -webkit-box-shadow: 0 0 10px #ccc;
     box-shadow: 0 0 10px #ccc;
 }
 .profile-right {
     width: 54%;
-    background-color: white;
+    /* background-color: white; */
+    border: 1px solid lightgray;
+    border-bottom: none;
+    border-top: none;
 }
 .profile-right-bio-cont {
     border: 0.5px solid lightgray;

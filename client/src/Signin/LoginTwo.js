@@ -65,7 +65,7 @@ const LoginTwo = (props) => {
             BackdropProps={{
                 timeout: 500,
             }}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%", borderRadius: "55px" }}
         >
             <div
                 className="login-modal-cont"
@@ -109,20 +109,6 @@ const LoginTwo = (props) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                {/* {hasAccount ? null : (
-                    <TextField
-                        id="outlined-basic"
-                        label="Username"
-                        variant="outlined"
-                        style={{
-                            marginBottom: "15px",
-                        }}
-                        value={username}
-                        onChange={(e) => {
-                            setUsername(e.target.value)
-                        }}
-                    />
-                )} */}
                 <TextField
                     type="password"
                     id="outlined-basic"
@@ -149,6 +135,7 @@ const LoginTwo = (props) => {
                         style={{
                             marginBottom: "15px",
                             height: "49px",
+                            backgroundColor: "#006FE6",
                         }}
                         onClick={handleLogin}
                     >
@@ -161,6 +148,7 @@ const LoginTwo = (props) => {
                         style={{
                             marginBottom: "15px",
                             height: "49px",
+                            backgroundColor: "#006FE6",
                         }}
                         onClick={handleSignup}
                     >
@@ -172,7 +160,7 @@ const LoginTwo = (props) => {
                     color="primary"
                     onClick={() => setHasAccount(!hasAccount)}
                     style={{
-                        backgroundcolor: "white",
+                        backgroundColor: "#006FE6",
                         height: "49px",
                     }}
                 >

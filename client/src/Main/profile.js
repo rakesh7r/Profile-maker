@@ -256,7 +256,11 @@ const Profile = (props) => {
                             // className="profile-right-bio-cont"
                             style={{ padding: "30px" }}
                         >
-                            <ProfileMain />
+                            <ProfileMain
+                                username={displayName}
+                                data={data}
+                                user={user}
+                            />
                         </div>
                     )}
                 </div>
