@@ -6,7 +6,10 @@ const App = (props) => {
     const { handleLogout } = props
     return (
         <div className="App">
-            <Routing user={props.user} handleLogout={handleLogout} />
+            <Routing
+                user={props.user}
+                handleLogout={handleLogout}
+            />
         </div>
     )
 }

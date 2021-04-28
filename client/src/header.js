@@ -1,21 +1,8 @@
 import React, { useState } from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import TextField from "@material-ui/core/TextField"
 import "./header.css"
 import { Link } from "react-router-dom"
-import $ from "jquery"
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        "& .MuiTextField-root": {
-            margin: theme.spacing(1),
-            width: "25ch",
-        },
-    },
-}))
 
 function Header() {
-    const classes = useStyles()
     const [searchValue, setSearchValue] = useState("")
     return (
         <div className="header-outer">

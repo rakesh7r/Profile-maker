@@ -1,6 +1,7 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from "./header"
+import Home from "./Home/Home"
 import GetProfile from "./Profile/GetProfile"
 import Profile from "./Profile/profile"
 import "./Routing.css"
@@ -23,11 +24,23 @@ function Routing(props) {
                     <Route
                         path="/home"
                         exact
-                        render={() => <h2>home</h2>}
+                        render={() => (
+                            <Home
+                                username={props.user.displayName}
+                                user={props.user}
+                            />
+                        )}
                     ></Route>
-                    <Route path="/" exact>
-                        Home
-                    </Route>
+                    <Route
+                        path="/"
+                        exact
+                        render={() => (
+                            <Home
+                                username={props.user.displayName}
+                                user={props.user}
+                            />
+                        )}
+                    ></Route>
                 </Switch>
             </Router>
         </div>
