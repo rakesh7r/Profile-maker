@@ -1,0 +1,40 @@
+.post {
+    width: 97%;
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    padding-top: 0px;
+    border-radius: 4px;
+}
+.post:hover {
+    box-shadow: 0px 0px 10px #ccc;
+}
+.post-header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    padding: 7px 0;
+    padding-bottom: 2px;
+    background-color: white;
+    font-family: "roboto", sans-serif;
+}
+.post-username {
+    padding: 10px;
+}
+.post-image-cont {
+    border-bottom: 1px solid lightgray;
+}
+.post-image {
+    max-width: 90%;
+    max-height: 400px;
+    object-fit: contain;
+}
+.post-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}

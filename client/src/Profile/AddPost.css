@@ -1,4 +1,11 @@
 .Addpost-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+.Addpost-container:hover {
+    box-shadow: 0 0 7px #ccc;
 }
 .addpost-textarea {
     border-color: lightgray;
@@ -13,5 +20,4 @@
     display: flex;
     justify-content: flex-end;
     padding: 15px;
-
 }

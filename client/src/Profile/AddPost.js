@@ -1,8 +1,8 @@
 import { Button } from "@material-ui/core"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { TextArea } from "semantic-ui-react"
 import "./AddPost.css"
-import Paperclip from "./paperclip"
+import Paperclip from "../icons/paperclip"
 import fire from "../Configurations/fire.js"
 import PropTypes from "prop-types"
 import CircularProgress from "@material-ui/core/CircularProgress"
@@ -43,6 +43,7 @@ function AddPost(props) {
     const [image, setImage] = useState(null)
     const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
+    const [reload, setReload] = useState(true)
     const [post, setPost] = useState({
         imageURL: null,
         caption: null,
@@ -106,12 +107,13 @@ function AddPost(props) {
                             .catch((err) => {
                                 console.log(err.messsage)
                             })
-                        
                     })
                     .catch((err) => alert(err.message))
             }
         )
+        setReload(!reload)
     }
+    useEffect(() => {}, [reload])
     return (
         <center>
             <div className="Addpost-container">

@@ -1,8 +1,8 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from "./header"
-import GetProfile from "./Main/GetProfile"
-import Profile from "./Main/profile"
+import GetProfile from "./Profile/GetProfile"
+import Profile from "./Profile/profile"
 import "./Routing.css"
 function Routing(props) {
     return (
