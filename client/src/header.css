@@ -11,6 +11,8 @@
     color: white;
     padding: 15px;
     padding-top: 0;
+    z-index: 999;
+    align-items: center;
 }
 .header-left,
 .header-right {
@@ -25,6 +27,8 @@
 .header-left {
     margin-top: -5px;
     width: 39vw;
+    display: flex;
+    align-items: center;
 }
 .header-right {
     margin-top: 10px;
@@ -32,7 +36,7 @@
 .header-search-field {
     border: 0.5px solid #464e57;
     outline: none;
-    height: 30px;
+    height: 20px;
     min-width: 200px;
     width: 17vw;
     border-radius: 10px;
@@ -63,7 +67,8 @@
 .header-right {
     display: flex;
     flex-direction: row;
-    width: 40vw;
-    justify-content: space-between;
+    width: 30vw;
+    justify-content: space-evenly;
     padding: 8px;
+    align-items: center;
 }

@@ -52,12 +52,7 @@ const Profile = (props) => {
         firestore
             .collection("users")
             .doc(displayName)
-            .get()
-            .then((doc) => {
-                setData(doc.data())
-                // console.log(data)
-            })
-            .catch((err) => console.log(err))
+            .onSnapshot((doc) => setData(doc.data()))
     }
 
     useEffect(() => {
@@ -253,7 +248,6 @@ const Profile = (props) => {
                         />
                     ) : (
                         <div
-                            // className="profile-right-bio-cont"
                             style={{ padding: "30px" }}
                         >
                             <ProfileMain

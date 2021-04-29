@@ -10,14 +10,10 @@ function ProfileMain(props) {
         fire.firestore()
             .collection("users")
             .doc(username)
-            .get()
-            .then((doc) => {
-                if (doc.exists) {
-                    setData(doc.data())
-                }
+            .onSnapshot((doc) => {
+                setData(doc.data())
             })
-            .catch((err) => console.error(err.message))
-    }, [data])
+    }, [])
     return (
         <div className="post-handler">
             <AddPost username={username} data={data} user={user} />

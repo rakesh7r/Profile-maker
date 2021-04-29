@@ -4,6 +4,7 @@ import Header from "./header"
 import Home from "./Home/Home"
 import GetProfile from "./Profile/GetProfile"
 import Profile from "./Profile/profile"
+import AddPostModal from "./Addpost/AddPostModal"
 import "./Routing.css"
 function Routing(props) {
     return (
@@ -19,10 +20,12 @@ function Routing(props) {
                     </Route>
                     <Route path="/user/:username" component={GetProfile} />
                     <Route path="/notifications">Notifications</Route>
-                    <Route path="/addpost">Addpost</Route>
+                    <Route path="/addpost">
+                        <AddPostModal user={props.user} />
+                    </Route>
                     <Route path="/explore">Explore</Route>
                     <Route
-                        path="/home"
+                        path="/"
                         exact
                         render={() => (
                             <Home
@@ -32,7 +35,7 @@ function Routing(props) {
                         )}
                     ></Route>
                     <Route
-                        path="/"
+                        path="/home"
                         exact
                         render={() => (
                             <Home

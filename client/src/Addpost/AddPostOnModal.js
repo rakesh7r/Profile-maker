@@ -1,7 +1,7 @@
 import { Button, IconButton } from "@material-ui/core"
 import React, { useEffect, useState } from "react"
 import { TextArea } from "semantic-ui-react"
-import "./AddPost.css"
+// import "./AddPost.css"
 import Paperclip from "../icons/paperclip"
 import fire from "../Configurations/fire.js"
 import PropTypes from "prop-types"
@@ -9,7 +9,7 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
 import firebase from "firebase"
-import { v4 as uuidv4 } from "uuid"
+import { Link } from "react-router-dom"
 
 function CircularProgressWithLabel(props) {
     return (
@@ -38,7 +38,7 @@ CircularProgressWithLabel.propTypes = {
     value: PropTypes.number.isRequired,
 }
 
-function AddPost(props) {
+function AddPostOnModal(props) {
     const [caption, setCaption] = useState("")
     const [image, setImage] = useState(null)
     const [progress, setProgress] = useState(0)
@@ -55,7 +55,8 @@ function AddPost(props) {
         handleUpload()
     }
     const handleUpload = () => {
-        const imageName = username + Date.now() + image.name
+        const imageName =
+            fire.auth().currentUser.displayName + Date.now() + image.name
         var uploadTask = storage.ref(`posts/${imageName}`).put(image)
         uploadTask.on(
             "state_changed",
@@ -66,7 +67,6 @@ function AddPost(props) {
                 setProgress(progress)
             },
             (error) => {
-                console.log(error)
                 alert(error.message)
             },
             () => {
@@ -81,7 +81,7 @@ function AddPost(props) {
                                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                                 mediaURL: downloadURL,
                                 caption: caption,
-                                username: username,
+                                username: fire.auth().currentUser.displayName,
                                 likes: 0,
                                 comments: null,
                                 saved: null,
@@ -89,7 +89,7 @@ function AddPost(props) {
                             .then((docRef) => {
                                 fire.firestore()
                                     .collection("users")
-                                    .doc(username)
+                                    .doc(fire.auth().currentUser.displayName)
                                     .update({
                                         posts: firebase.firestore.FieldValue.arrayUnion(
                                             docRef.id
@@ -105,10 +105,9 @@ function AddPost(props) {
         )
         setReload(!reload)
     }
-    useEffect(() => {}, [reload])
     return (
         <center>
-            <div className="Addpost-container">
+            <div className="Addpost-container" style={{ minWidth: "50vw" }}>
                 <TextArea
                     rows={3}
                     placeholder="Post Something..."
@@ -150,28 +149,32 @@ function AddPost(props) {
                         <Paperclip className="loading-animation" />
                         <input
                             type="file"
-                            accept="image/*,video/*"
+                            accept="image/*"
                             hidden
                             onChange={(event) => {
                                 setImage(event.target.files[0])
-                                console.log(event.target.files[0])
                             }}
                         />
                     </IconButton>
-                    <Button
-                        variant="contained"
-                        style={{
-                            backgroundColor: "#007bff",
-                            color: " white",
-                            marginLeft: "15px",
-                        }}
-                        onClick={() => {
-                            setCaption("")
-                            setImage(null)
-                        }}
+                    <Link
+                        to="/home"
+                        style={{ textDecoration: "none", color: "white" }}
                     >
-                        Discard
-                    </Button>
+                        <Button
+                            variant="contained"
+                            style={{
+                                backgroundColor: "#007bff",
+                                color: " white",
+                                marginLeft: "15px",
+                            }}
+                            onClick={() => {
+                                setCaption("")
+                                setImage(null)
+                            }}
+                        >
+                            Discard
+                        </Button>
+                    </Link>
 
                     <Button
                         variant="contained"
@@ -190,4 +193,4 @@ function AddPost(props) {
     )
 }
 
-export default AddPost
+export default AddPostOnModal

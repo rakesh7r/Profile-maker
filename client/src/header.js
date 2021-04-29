@@ -1,6 +1,10 @@
 import React, { useState } from "react"
 import "./header.css"
 import { Link } from "react-router-dom"
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline"
+import { IconButton } from "@material-ui/core"
+import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined"
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined"
 
 function Header() {
     const [searchValue, setSearchValue] = useState("")
@@ -28,25 +32,34 @@ function Header() {
                     style={{ textDecoration: "none", color: "white" }}
                     to="/home"
                 >
-                    <h3>Home</h3>
+                    {/* <h3>Home</h3> */}
+                    <IconButton color="inherit" size="30px">
+                        <HomeOutlinedIcon />
+                    </IconButton>
                 </Link>
-                <Link
+                {/* <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/addpost"
                 >
                     <h3>Add Post</h3>
-                </Link>
+                </Link> */}
                 <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/notifications"
                 >
-                    <h3>Notifications</h3>
+                    {/* <h3>Notifications</h3> */}
+                    <IconButton color="inherit">
+                        <NotificationsNoneOutlinedIcon />
+                    </IconButton>
                 </Link>
                 <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/profile"
                 >
-                    <h3>Profile</h3>
+                    {/* <h3>Profile</h3> */}
+                    <IconButton color="inherit">
+                        <PersonOutlineIcon />
+                    </IconButton>
                 </Link>
             </div>
         </div>
